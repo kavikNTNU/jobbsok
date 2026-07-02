@@ -1,6 +1,12 @@
 import Image from "next/image";
+import { supabase } from "./lib/supabase";
 
-export default function Home() {
+export default async function Home() {
+  // Temporary: verifies the Supabase connection is wired up correctly.
+  // Remove this block once you've confirmed data comes back.
+  const { data, error } = await supabase.from("user_skills").select("*");
+  console.log("user_skills query result:", { data, error });
+
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
