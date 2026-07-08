@@ -6,7 +6,7 @@ type UserSkill = { id: string; skill_name: string; proficiency: string | null }
 
 export default function SkillsPage() {
   // return <UserSkillsManager />
-   const [skills, setSkills] = useState<UserSkill[]>([])
+  const [skills, setSkills] = useState<UserSkill[]>([])
   const [newSkill, setNewSkill] = useState('')
 
   function loadSkills() {
