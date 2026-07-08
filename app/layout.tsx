@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
+import { Space_Grotesk, Public_Sans, IBM_Plex_Mono } from "next/font/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,14 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ['latin'], variable: '--font-display' 
+});
+
+const publicSans = Public_Sans({ subsets: ['latin'], variable: '--font-body' })
+
+const plexMono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono' })
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,10 +37,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <div style={{ display: "flex" }}>
-          <Sidebar />
-          <main style={{ flex: 1 }}>{children}</main>
+      <body className={`min-h-full flex flex-col ${spaceGrotesk.variable} ${publicSans.variable} ${plexMono.variable}`}>
+        <div style={{ display: 'flex', minHeight: '100vh' }}>
+        <Sidebar />
+          <main style={{ flex: 1, padding: '1.5rem 2rem' }}>
+            {children}
+          </main>
         </div>
       </body>
     </html>
