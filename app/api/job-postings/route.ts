@@ -53,3 +53,15 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({ posting, skills: foundSkills }, { status: 201 })
 }
+
+export async function GET() {
+  const { data, error } = await supabase
+    .from('job_postings')
+    .select('id, title, company, created_at')
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+  return NextResponse.json({ postings: data })
+}
