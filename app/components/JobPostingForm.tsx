@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 
-export default function JobPostingForm() {
+export default function JobPostingForm({ onSuccess }: { onSuccess?: () => void }) {
   const [title, setTitle] = useState('')
   const [company, setCompany] = useState('')
   const [rawText, setRawText] = useState('')
@@ -33,6 +33,7 @@ export default function JobPostingForm() {
     setTitle('')
     setCompany('')
     setRawText('')
+    onSuccess?.()
   }
 
   return (
