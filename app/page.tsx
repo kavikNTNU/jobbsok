@@ -3,6 +3,7 @@ import JobPostingForm from './components/JobPostingForm'
 import SkillPatterns from './components/SkillPatterns'
 import UserSkillsManager from "./components/UserSkillsManager";
 import SkillGap from './components/SkillGap'
+import Roadmap from "./components/Roadmap";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <SkillPatterns />
       <UserSkillsManager />
       <SkillGap />
+      <Roadmap />
     </div>
   )
 }
