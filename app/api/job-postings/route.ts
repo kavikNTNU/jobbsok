@@ -1,17 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '../../lib/supabase'
-
-// Deliberately simple keyword list for now — real extraction comes later
-const KNOWN_SKILLS = [
-  'TypeScript', 'JavaScript', 'React', 'Next.js', 'SQL',
-  'Python', 'communication', 'teamwork', 'leadership'
-]
+import { extractSkillsWithMeta, detectSeniority, detectWorkFormat, detectEmploymentType, generateSummary } from '../../lib/skillAnalysis'
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
   const { title, company, raw_text } = body
 
-  // Basic validation — reject the request early if required fields are missing
   if (!title || !raw_text) {
     return NextResponse.json(
       { error: 'title and raw_text are required' },
@@ -19,10 +13,15 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  // Step 1: insert the job posting
+  const skills = extractSkillsWithMeta(raw_text)
+  const seniority = detectSeniority(raw_text)
+  const work_format = detectWorkFormat(raw_text)
+  const employment_type = detectEmploymentType(raw_text)
+  const summary = generateSummary(skills, seniority, work_format, employment_type)
+
   const { data: posting, error: postingError } = await supabase
     .from('job_postings')
-    .insert({ title, company, raw_text })
+    .insert({ title, company, raw_text, seniority, work_format, employment_type, summary })
     .select()
     .single()
 
@@ -30,28 +29,26 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: postingError.message }, { status: 500 })
   }
 
-  // Step 2: naive skill extraction — case-insensitive substring match
-  const foundSkills = KNOWN_SKILLS.filter(skill =>
-    raw_text.toLowerCase().includes(skill.toLowerCase())
-  )
-
-  // Step 3: insert extracted skills, linked to the posting
-  if (foundSkills.length > 0) {
+  if (skills.length > 0) {
     const { error: skillsError } = await supabase
       .from('extracted_skills')
-      .insert(
-        foundSkills.map(skill_name => ({
-          job_posting_id: posting.id,
-          skill_name
-        }))
-      )
+      .insert(skills.map(s => ({
+        job_posting_id: posting.id,
+        skill_name: s.skill_name,
+        category: s.category,
+        priority: s.priority,
+      })))
 
     if (skillsError) {
       return NextResponse.json({ error: skillsError.message }, { status: 500 })
     }
   }
 
-  return NextResponse.json({ posting, skills: foundSkills }, { status: 201 })
+  const { data: userSkills } = await supabase.from('user_skills').select('skill_name')
+  const ownedNames = new Set((userSkills ?? []).map(s => s.skill_name))
+  const skillsWithOwnership = skills.map(s => ({ ...s, isOwned: ownedNames.has(s.skill_name) }))
+
+  return NextResponse.json({ posting, skills: skillsWithOwnership }, { status: 201 })
 }
 
 export async function GET() {

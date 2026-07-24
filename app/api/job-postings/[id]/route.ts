@@ -16,10 +16,14 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
   const { data: skills } = await supabase
     .from('extracted_skills')
-    .select('skill_name')
+    .select('skill_name, category, priority')
     .eq('job_posting_id', id)
 
-  return NextResponse.json({ posting, skills: skills ?? [] })
+  const { data: userSkills } = await supabase.from('user_skills').select('skill_name')
+  const ownedNames = new Set((userSkills ?? []).map(s => s.skill_name))
+  const skillsWithOwnership = (skills ?? []).map(s => ({ ...s, isOwned: ownedNames.has(s.skill_name) }))
+
+  return NextResponse.json({ posting, skills: skillsWithOwnership })
 }
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
