@@ -25,6 +25,11 @@ Multi-side arkitektur med konsistent design (spruce/ochre/paper/ink).
 - [ ] Live-scanning av profil/søknad/CV over tid
 - [ ] Lenker til eksterne relevante ressurser/verktøy
 - [ ] Community/rekrutterer-innsikt
+- [ ] Varsling om nye relevante stillingsannonser fra eksterne jobbportaler (Finn.no, Abakus.no,
+      NAV/Arbeidsplassen, e.l.), matchet mot jobbprofilen (ferdigheter du har + ferdigheter
+      stillingen etterspør). NAV har et åpent stillings-API ment for tredjepartsbruk — naturlig
+      første kilde. Finn.no og andre kommersielle portaler krever trolig partnertilgang eller må
+      ToS-sjekkes før noen form for automatisert innhenting bygges — ikke anta skraping er greit
 
 ## Strukturelt — kreves for å skalere utover enbruker/lokal
 - [ ] Auth (ekte brukere, ikke enbruker uten innlogging)
