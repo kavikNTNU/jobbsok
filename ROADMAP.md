@@ -42,6 +42,21 @@ Multi-side arkitektur med konsistent design (spruce/ochre/paper/ink).
 - [ ] Kapasitet/ytelse for flere brukere
 - [ ] Vurdere betalte AI-verktøy (Claude API e.l.) når prosjektet er modent nok til at kostnad fordeles på faktisk bruk — ikke nå
 
+## Vedlikehold — for når "enda en ny feature" ikke er fokus
+Ikke bundet til rekkefølge eller frist. Fylles på løpende og krysses av når det passer —
+stedet å falle tilbake på mellom feature-arbeid, ikke noe som skal presses gjennom på én gang.
+CI kjører nå `typecheck` + `lint` på push/PR (`.github/workflows/ci.yml`), så regresjon i disse
+to fanges automatisk. Verdt å utvide selve CI-jobben etter hvert som testdekning kommer.
+- [ ] Testoppsett: start med Vitest og skriv første tester for `skillAnalysis.ts` sine rene
+      funksjoner (ingen database, ingen React — billigst og mest lærerikt sted å begynne).
+      Legg testjobben til i CI-workflowen når den finnes.
+- [ ] `app/error.tsx` + synlig feil-tilstand i fetches — i dag henger sider i "Laster..." for alltid
+      hvis en fetch faktisk feiler, siden ingen side håndterer feil-responser fra API-rutene
+- [ ] Rydd opp i ubrukte dupliserte komponenter: `SkillGap.tsx` og `UserSkillsManager.tsx` er
+      bekreftet døde (samme "kommentert ut, erstattet av inline-duplikat i siden"-mønster som
+      `SkillPatterns`/`Roadmap` hadde før de ble konsolidert) — slett dem, eller gjenopplive og
+      konsolider på samme måte
+
 ## Arkitekturprinsipp
 Alt henger sammen via ÉN delt jobbprofil. Fremtidige features (søknadsgenerering,
 intervjuforberedelse, live-scanning) leser fra og skriver til samme grunnlag —
