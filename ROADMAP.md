@@ -17,7 +17,11 @@ Multi-side arkitektur med konsistent design (spruce/ochre/paper/ink).
 
 ## Mellomlangsiktig — jobbprofil og søknader
 - [ ] Utvide "Mine ferdigheter" til full jobbprofil: CV-innhold, notater, erfaring
-- [ ] Søknadsside: 1) tilbakemelding på egenskrevne søknader, 2) generere skreddersydde søknader per annonse
+- [ ] Søknadsside: 1) tilbakemelding på egenskrevne søknader, 2) generere skreddersydde søknader per annonse.
+      Tilbakemeldingen bør konkret være en sjekkpunkt-liste (innfridd / ikke innfridd), vurdert mot
+      to kriteriesett: annonsens spesifikke krav, og generelle beste-praksis for søknad/CV-skriving
+      hentet fra eksterne kilder — ikke bare lenket ut (som "Langsiktig"-punktet under), men faktisk
+      vevd inn som vurderingskriterier
 - [ ] Kobling: søknadsgenerering bruker jobbprofil + spesifikk annonse
 
 ## Langsiktig — intervju og livssyklus
