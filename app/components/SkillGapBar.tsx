@@ -1,4 +1,4 @@
-export default function SkillGapBar({ skillName, count, maxCount, isGap }: { skillName: string; count: number; maxCount: number; isGap: boolean }) {
+export default function SkillGapBar({ skillName, count, maxCount, isGap, total }: { skillName: string; count: number; maxCount: number; isGap: boolean; total?: number }) {
   const widthPercent = Math.round((count / maxCount) * 100)
 
   return (
@@ -18,7 +18,9 @@ export default function SkillGapBar({ skillName, count, maxCount, isGap }: { ski
           }} />
         )}
       </div>
-      <div className="mono" style={{ fontSize: '12px', color: 'var(--muted)', width: '20px', textAlign: 'right' }}>{count}</div>
+      <div className="mono" style={{ fontSize: '12px', color: 'var(--muted)', width: total ? '40px' : '20px', textAlign: 'right' }}>
+        {total ? `${count}/${total}` : count}
+      </div>
     </div>
   )
 }

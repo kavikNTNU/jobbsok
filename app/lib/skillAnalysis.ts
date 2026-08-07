@@ -58,6 +58,10 @@ function detectPriority(lowerText: string, matchIndex: number): Priority {
 
 export type ExtractedSkill = { skill_name: string; category: SkillCategory; priority: Priority }
 
+export function getSkillCategory(skillName: string): SkillCategory | undefined {
+  return SKILLS.find(s => s.name === skillName)?.category
+}
+
 export function extractSkillsWithMeta(rawText: string): ExtractedSkill[] {
   const lowerText = rawText.toLowerCase()
   const found: ExtractedSkill[] = []
