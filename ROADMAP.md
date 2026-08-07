@@ -11,6 +11,9 @@ Multi-side arkitektur med konsistent design (spruce/ochre/paper/ink).
 - [ ] Forbedre veikart-forklaringer (mer nyansert enn "appears in X postings")
 - [ ] Forbedre mønster-visning
 - [ ] Utvide SKILL_SYNONYMS løpende med reelle annonser (Finn.no)
+- [ ] Læringsmekanisme for ferdighetsgjenkjenning: analysere limte inn annonser over tid for å
+      oppdage nye ferdigheter/teknologibehov som ikke fanges av dagens liste, og foreslå nye
+      synonymer/omformuleringer av kjente ferdigheter automatisk — utover manuell utvidelse
 
 ## Mellomlangsiktig — jobbprofil og søknader
 - [ ] Utvide "Mine ferdigheter" til full jobbprofil: CV-innhold, notater, erfaring
