@@ -7,10 +7,10 @@ export default function UserSkillsManager() {
   const [skills, setSkills] = useState<UserSkill[]>([])
   const [newSkill, setNewSkill] = useState('')
 
-  async function loadSkills() {
-    const res = await fetch('/api/user-skills')
-    const data = await res.json()
-    setSkills(data.skills ?? [])
+  function loadSkills() {
+    fetch('/api/user-skills')
+      .then(res => res.json())
+      .then(data => setSkills(data.skills ?? []))
   }
 
   useEffect(() => {

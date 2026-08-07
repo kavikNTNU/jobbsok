@@ -75,12 +75,13 @@ function PostingSelector({ onCompare }: { onCompare: (ids: string[]) => void }) 
 function ComparisonView({ ids }: { ids: string[] }) {
   const [postings, setPostings] = useState<PostingWithSkills[]>([])
   const router = useRouter()
+  const idsKey = ids.join(',')
 
   useEffect(() => {
-    fetch(`/api/job-postings/compare?ids=${ids.join(',')}`)
+    fetch(`/api/job-postings/compare?ids=${idsKey}`)
       .then(res => res.json())
       .then(data => setPostings(data.postings ?? []))
-  }, [ids.join(',')])
+  }, [idsKey])
 
   const allSkills = Array.from(new Set(postings.flatMap(p => p.skills))).sort()
   const commonSkills = allSkills.filter(skill => postings.every(p => p.skills.includes(skill)))

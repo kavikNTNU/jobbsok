@@ -8,7 +8,6 @@ type Pattern = { skill_name: string; count: number }
 export default function DashboardPage() {
   const [patterns, setPatterns] = useState<Pattern[]>([])
   const [userSkillNames, setUserSkillNames] = useState<string[]>([])
-  const [postingCount, setPostingCount] = useState(0)
 
   useEffect(() => {
     fetch('/api/skill-patterns').then(res => res.json()).then(data => setPatterns(data.patterns ?? []))
