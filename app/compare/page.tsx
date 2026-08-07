@@ -1,20 +1,20 @@
 'use client'
 
-// import SkillGap from '../components/SkillGap'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 
 type PostingSummary = { id: string; title: string; company: string | null }
 type PostingWithSkills = { id: string; title: string; company: string | null; skills: string[] }
 
-
 export default function ComparePage() {
-  // return (
-    // <div>
-    //   <h1>Compare</h1>
-      {/* <SkillGap />  */}
-    // </div>
-  // )
+  return (
+    <Suspense fallback={<p>Laster...</p>}>
+      <ComparePageInner />
+    </Suspense>
+  )
+}
+
+function ComparePageInner() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const idsParam = searchParams.get('ids')
