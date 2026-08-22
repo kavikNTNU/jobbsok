@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import PostingAnalysis from './PostingAnalysis'
 
 type SkillResult = { skill_name: string; category: string; priority: string; isOwned: boolean }
 type Posting = { seniority: string; work_format: string; employment_type: string; summary: string }
@@ -38,8 +39,6 @@ export default function JobPostingForm({ onSuccess }: { onSuccess?: () => void }
     onSuccess?.()
   }
 
-  const categories = result ? Array.from(new Set(result.skills.map(s => s.category))) : []
-
   return (
     <div>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxWidth: '500px' }}>
@@ -57,33 +56,8 @@ export default function JobPostingForm({ onSuccess }: { onSuccess?: () => void }
       </form>
 
       {result && (
-        <div style={{ marginTop: '1.5rem', background: '#fff', border: '0.5px solid var(--line)', borderRadius: '8px', padding: '1rem', maxWidth: '600px' }}>
-          <p style={{ fontSize: '13px', marginBottom: '0.75rem' }}>{result.posting.summary}</p>
-
-          <div style={{ display: 'flex', gap: '8px', marginBottom: '1rem', flexWrap: 'wrap' }}>
-            {[result.posting.seniority, result.posting.work_format, result.posting.employment_type]
-              .filter(v => v !== 'uspesifisert')
-              .map(v => (
-                <span key={v} style={{ fontSize: '11px', padding: '2px 8px', background: 'var(--spruce-light)', borderRadius: '4px' }}>{v}</span>
-              ))}
-          </div>
-
-          {categories.map(category => (
-            <div key={category} style={{ marginBottom: '0.75rem' }}>
-              <div style={{ fontSize: '12px', color: 'var(--muted)', marginBottom: '4px' }}>{category}</div>
-              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                {result.skills.filter(s => s.category === category).map(s => (
-                  <span key={s.skill_name} style={{
-                    fontSize: '12px', padding: '3px 8px', borderRadius: '4px',
-                    border: `0.5px solid ${s.priority === 'critical' ? 'var(--ochre)' : 'var(--line)'}`,
-                    background: s.isOwned ? 'var(--spruce-light)' : '#fff',
-                  }}>
-                    {s.isOwned ? '✓ ' : ''}{s.skill_name}{s.priority === 'critical' ? ' •' : ''}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div style={{ marginTop: '1.5rem', maxWidth: '600px' }}>
+          <PostingAnalysis posting={result.posting} skills={result.skills} />
         </div>
       )}
     </div>

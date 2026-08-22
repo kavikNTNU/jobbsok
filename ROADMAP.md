@@ -7,7 +7,7 @@ Multi-side arkitektur med konsistent design (spruce/ochre/paper/ink).
 ---
 
 ## Kortsiktig — forbedre eksisterende kjernefunksjonalitet
-- [ ] Rikere "umiddelbar scanning"-oppsummering (kategorisert, prioritert analyse per annonse)
+- [x] Rikere "umiddelbar scanning"-oppsummering (kategorisert, prioritert analyse per annonse)
 - [ ] Forbedre veikart-forklaringer (mer nyansert enn "appears in X postings")
 - [ ] Forbedre mønster-visning
 - [ ] Utvide SKILL_SYNONYMS løpende med reelle annonser (Finn.no)
