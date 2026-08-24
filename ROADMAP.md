@@ -34,6 +34,14 @@ Multi-side arkitektur med konsistent design (spruce/ochre/paper/ink).
       stillingen etterspør). NAV har et åpent stillings-API ment for tredjepartsbruk — naturlig
       første kilde. Finn.no og andre kommersielle portaler krever trolig partnertilgang eller må
       ToS-sjekkes før noen form for automatisert innhenting bygges — ikke anta skraping er greit
+- [ ] Skann stillingsannonse fra lenke: lim inn en URL i stedet for å copy-paste teksten, verktøyet
+      henter siden og kjører den gjennom samme analyse (extractSkillsWithMeta, generateSummary,
+      osv.) som ved copy-paste. Lavere risiko enn varsling-punktet over siden det er brukerinitiert
+      på én lenke brukeren allerede har funnet, ikke automatisert overvåking av en hel portal — men
+      mange annonseplattformer rendrer innhold med JavaScript (krever en faktisk nettleser, ikke
+      bare en enkel fetch), og sidestruktur varierer nok mellom portaler til at uttrekk av "bare
+      selve annonseteksten" (uten navigasjon, relaterte annonser, cookie-banner) blir en heuristikk
+      man må justere per portal, ikke en generell løsning man bygger én gang
 
 ## Strukturelt — kreves for å skalere utover enbruker/lokal
 - [ ] Auth (ekte brukere, ikke enbruker uten innlogging)
